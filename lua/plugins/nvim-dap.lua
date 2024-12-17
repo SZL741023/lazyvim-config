@@ -45,16 +45,16 @@ return {
     "mfussenegger/nvim-dap-python",
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
-      require("dap-python").setup("/Users/aotselin/.virtualenv/python_backend/bin/python") -- python backed virtualenv
-      -- require("dap-python").setup("/Users/aotselin/.virtualenv/flytekit//bin/python") -- flytekit virtualenv
+      -- require("dap-python").setup("/Users/aotselin/.virtualenv/python_backend/bin/python") -- python backed virtualenv
+      require("dap-python").setup("/Users/aotselin/.virtualenv/flytekit//bin/python") -- flytekit virtualenv
       -- require("dap-python").setup("/opt/homebrew/bin/python3.11") -- 可替換為你虛擬環境的 Python 路徑
     end,
   },
-  {
-    "theHamsta/nvim-dap-virtual-text",
-    dependencies = { "mfussenegger/nvim-dap" },
-    config = function()
-      require("nvim-dap-virtual-text").setup()
-    end,
-  },
+  -- {
+  --   "theHamsta/nvim-dap-virtual-text",
+  --   dependencies = { "mfussenegger/nvim-dap" },
+  --   config = function()
+  --     require("nvim-dap-virtual-text").setup()
+  --   end,
+  -- },
 }
