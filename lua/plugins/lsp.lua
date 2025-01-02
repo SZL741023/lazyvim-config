@@ -60,6 +60,23 @@ return {
             },
           },
         },
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                typeCheckingMode = "off", -- 關閉型別檢查
+                autoSearchPaths = true, -- 自動搜尋依賴路徑
+                useLibraryCodeForTypes = true, -- 使用庫的型別檢查
+                diagnosticSeverityOverrides = { -- 覆蓋特定診斷錯誤
+                  reportOptionalMemberAccess = "none", -- 忽略可選成員存取錯誤
+                  reportOptionalSubscript = "none", -- 忽略索引錯誤
+                  reportUnboundVariable = "none", -- 忽略未綁定變數錯誤
+                  reportUnusedVariable = "none", -- 忽略未使用變數警告
+                },
+              },
+            },
+          },
+        },
         html = {},
         yamlls = {
           settings = {
