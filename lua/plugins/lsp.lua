@@ -72,6 +72,7 @@ return {
                   reportOptionalSubscript = "none", -- 忽略索引錯誤
                   reportUnboundVariable = "none", -- 忽略未綁定變數錯誤
                   reportUnusedVariable = "none", -- 忽略未使用變數警告
+                  reportUnusedImport = "none", -- 忽略未使用引入警告
                 },
               },
             },
