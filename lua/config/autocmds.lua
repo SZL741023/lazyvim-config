@@ -15,12 +15,12 @@ vim.api.nvim_create_autocmd("InsertLeave", {
 
 -- Disable the concealing in some file formats
 -- The default conceallevel is 3 in LazyVim
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "json", "jsonc", "markdown" },
-  callback = function()
-    vim.opt.conceallevel = 0
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "json", "jsonc", "markdown" },
+--   callback = function()
+--     vim.opt.conceallevel = 0
+--   end,
+-- })
 
 -- Language-specific indentation settings
 vim.api.nvim_create_autocmd("FileType", {
@@ -35,9 +35,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "python" },
+  pattern = { "python", "java" },
   callback = function()
-    -- Python typically uses 4 spaces (PEP 8)
+    -- 4-space indentation
     vim.opt_local.expandtab = true
     vim.opt_local.tabstop = 4
     vim.opt_local.shiftwidth = 4
@@ -46,75 +46,22 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "java" },
+  pattern = {
+    "javascript",
+    "javascriptreact",
+    "jsx",
+    "typescript",
+    "typescriptreact",
+    "tsx",
+    "yaml",
+    "yml",
+    "json",
+    "jsonc",
+    "lua",
+    "markdown",
+  },
   callback = function()
-    -- Java typically uses 4 spaces
-    vim.opt_local.expandtab = true
-    vim.opt_local.tabstop = 4
-    vim.opt_local.shiftwidth = 4
-    vim.opt_local.softtabstop = 4
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "javascript", "javascriptreact", "jsx" },
-  callback = function()
-    -- JavaScript/JSX typically uses 2 spaces
-    vim.opt_local.expandtab = true
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.softtabstop = 2
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "typescript", "typescriptreact", "tsx" },
-  callback = function()
-    -- TypeScript/TSX typically uses 2 spaces
-    vim.opt_local.expandtab = true
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.softtabstop = 2
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "yaml", "yml" },
-  callback = function()
-    -- YAML typically uses 2 spaces
-    vim.opt_local.expandtab = true
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.softtabstop = 2
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "json", "jsonc" },
-  callback = function()
-    -- JSON typically uses 2 spaces
-    vim.opt_local.expandtab = true
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.softtabstop = 2
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "lua" },
-  callback = function()
-    -- Lua typically uses 2 spaces
-    vim.opt_local.expandtab = true
-    vim.opt_local.tabstop = 2
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.softtabstop = 2
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown" },
-  callback = function()
-    -- Markdown typically uses 2 spaces
+    -- 2-space indentation
     vim.opt_local.expandtab = true
     vim.opt_local.tabstop = 2
     vim.opt_local.shiftwidth = 2
