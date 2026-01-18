@@ -65,6 +65,18 @@ return {
       workspace_dir,
     }
 
+    local bundles = {}
+    local function add_bundles(glob)
+      local matches = vim.split(vim.fn.glob(glob), "\n")
+      if matches[1] ~= "" then
+        for _, jar in ipairs(matches) do
+          table.insert(bundles, jar)
+        end
+      end
+    end
+    add_bundles(mason .. "/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar")
+    add_bundles(mason .. "/packages/java-test/extension/server/*.jar")
+
     return {
       cmd = cmd,
       -- 再保險：也把 JAVA_HOME 指向 21（某些外掛會讀）
@@ -73,7 +85,7 @@ return {
         PATH = JAVA_21_HOME .. "/bin:" .. vim.env.PATH,
       },
 
-      root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "pom.xml" }),
+      root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "pom.xml" }) or vim.fn.getcwd(),
 
       -- ✅ 保留你原本的 settings，並鎖專案為 Java 17 相容
       settings = {
@@ -97,8 +109,19 @@ return {
           },
         },
       },
+      init_options = {
+        bundles = bundles,
+      },
 
       on_attach = function(_, bufnr)
+        local jdtls = require("jdtls")
+        jdtls.setup_dap({ hotcodereplace = "auto" })
+        local ok_dap, jdtls_dap = pcall(require, "jdtls.dap")
+        if ok_dap then
+          jdtls_dap.setup_dap_main_class_configs()
+        else
+          vim.notify("[jdtls] jdtls.dap not available; skipping main class DAP configs", vim.log.levels.WARN)
+        end
         local map = function(mode, lhs, rhs)
           vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, silent = true, noremap = true })
         end
