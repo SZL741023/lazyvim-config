@@ -2,8 +2,19 @@ return {
   "mfussenegger/nvim-jdtls",
   ft = { "java" },
 
-  config = function(_, opts)
-    require("jdtls").start_or_attach(opts)
+  config = function()
+    -- 使用 autocmd 確保每個 Java buffer 都會 attach
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "java",
+      callback = function()
+        local opts = require("lazy.core.plugin").values(
+          require("lazy.core.config").plugins["nvim-jdtls"],
+          "opts",
+          false
+        )
+        require("jdtls").start_or_attach(opts)
+      end,
+    })
   end,
 
   opts = function()
