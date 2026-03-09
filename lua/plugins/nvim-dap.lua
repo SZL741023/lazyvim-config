@@ -46,9 +46,27 @@ return {
     "mfussenegger/nvim-dap-python",
     dependencies = { "mfussenegger/nvim-dap" },
     config = function()
-      -- require("dap-python").setup("/Users/aotselin/.virtualenv/python_backend/bin/python") -- python backed virtualenv
-      require("dap-python").setup("/Users/aotselin/.virtualenv/flytekit//bin/python") -- flytekit virtualenv
-      -- require("dap-python").setup("/opt/homebrew/bin/python3.11") -- 可替換為你虛擬環境的 Python 路徑
+      local function get_python_path()
+        -- 1. 已啟動的 venv（terminal 裡 source activate 過的）
+        local venv = os.getenv("VIRTUAL_ENV") or os.getenv("CONDA_PREFIX")
+        if venv then
+          return venv .. "/bin/python"
+        end
+
+        -- 2. 從 cwd 往上找常見 venv 目錄
+        local cwd = vim.fn.getcwd()
+        for _, dir in ipairs({ ".venv", "venv", ".virtualenv", "env" }) do
+          local candidate = cwd .. "/" .. dir .. "/bin/python"
+          if vim.fn.executable(candidate) == 1 then
+            return candidate
+          end
+        end
+
+        -- 3. Fallback: 系統 python3
+        return vim.fn.exepath("python3") or vim.fn.exepath("python") or "python"
+      end
+
+      require("dap-python").setup(get_python_path())
     end,
   },
   -- {

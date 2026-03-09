@@ -53,12 +53,12 @@ return {
     end,
   },
 
-  {
-    "rcarriga/nvim-notify",
-    opts = {
-      timeout = 30000,
-    },
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   opts = {
+  --     timeout = 30000,
+  --   },
+  -- },
 
   -- animations
   {
