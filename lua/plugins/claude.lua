@@ -5,7 +5,7 @@ return {
     opts = {
       terminal = {
         split_side = "left",
-        split_width_percentage = 0.40,
+        split_width_percentage = 0.35,
       },
     },
     config = true,
