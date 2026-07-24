@@ -6,6 +6,7 @@ return {
       terminal = {
         split_side = "left",
         split_width_percentage = 0.35,
+        auto_insert = false,
       },
     },
     config = true,
